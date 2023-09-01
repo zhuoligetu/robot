@@ -1,0 +1,20 @@
+version: '3.4'
+services:
+  robot-workspace-test:                          #容器名称
+    build:
+      context: .
+    image: robot-docker-image    #image:tag 创建镜像名称及tag
+    network_mode: host
+    restart: always
+    environment:
+      - VNC_PW=1
+      - VNC_GEOMETRY=1920x1080
+      - VNC_DEPTH=24
+    volumes:                                          #主机与容器的卷共享
+      - /home/robot/gitee_test/bit_workspace:/root/workspace
+      - /usr/bin/software:/usr/bin/software
+    ports:
+      # noVNC port:
+      - 46080:6080
+      # standard VNC port:
+      - 45901:5901
